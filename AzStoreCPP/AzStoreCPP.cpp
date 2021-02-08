@@ -46,7 +46,7 @@ public:
         _deleted = 1;
 
         _qMsg = _q.get_message();
-        queue.delete_message(_qMsg);
+        _q.delete_message(_qMsg);
         
         return _deleted; 
     }
@@ -58,7 +58,7 @@ qMessage::qMessage(string q) {
     _connStr = utility::string_t storage_connection_string(U("UseDevelopmentStorage=true;"));
     _storeAcct = azure::storage::cloud_storage_account::parse(_connStr);
     _qClient = _storeAcct.create_cloud_queue_client();
-    _qMsg = queue_client.get_queue_reference(U(q));
+    _q = _qClient.get_queue_reference(U(q));
 }
 
 
